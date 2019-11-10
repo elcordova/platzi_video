@@ -5,7 +5,6 @@ import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
-import useInitalState from '../hooks/useInitialState';
 
 const Home = ({ myList, trends, originals }) => {
   return (
@@ -15,14 +14,20 @@ const Home = ({ myList, trends, originals }) => {
         myList.length > 0 && (
           <Categories title='Mi Lista'>
             <Carousel>
-              {myList.map((item) => <CarouselItem key={item.id} {...item} />)}
+              {myList.map((item, index) => (
+                <CarouselItem
+                  key={`mylist${index}`}
+                  {...item}
+                  isList
+                />
+              ))}
             </Carousel>
           </Categories>
         )
       }
       <Categories title='Tendencias'>
         <Carousel>
-          {trends.map((item) => <CarouselItem key={item.id} {...item} />)}
+          {trends.map((item, index) => <CarouselItem key={`trends${index}`} {...item} />)}
         </Carousel>
       </Categories>
 
@@ -30,7 +35,7 @@ const Home = ({ myList, trends, originals }) => {
         originals.length > 0 && (
           <Categories title='Originales Platzi'>
             <Carousel>
-              {originals.map((item) => <CarouselItem key={item.id} {...item} />)}
+              {originals.map((item, index) => <CarouselItem key={`originals${index}`} {...item} />)}
             </Carousel>
           </Categories>
         )
